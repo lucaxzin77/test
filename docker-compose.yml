@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: cinco_irmoes
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user_pass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql
+    ports:
+      - "3310:3306"
+
+  api:
+    image: node:latest
+    working_dir: /app
+    volumes:
+      - ./api:/app
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+    command: bash -c "npm install && npm run dev"
+
+  # frontend:
+  #   image: node:latest
+  #   working_dir: /app
+  #   volumes:
+  #     - ./frontend:/app 
+  #   ports:
+  #     - "5173:5173"
+  #   depends_on:
+  #     - api
+  #   command: bash -c "npm install && npm run dev -- --host"
+
+volumes:
+  db_data:
