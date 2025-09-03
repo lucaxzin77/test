@@ -4,9 +4,7 @@ import { ControllerVeiculo } from '../controllers/Veiculo.js';
 export const router = Router();
 
 router.get('/', ControllerVeiculo.getVeiculos);
-router.post('/', (req, res)=>{
-    res.send('HELLO WORLD')
-});
+router.post('/', ControllerVeiculo.addVeiculo);
 router.put('/:id', (req, res)=>{
     res.send('HELLO WORLD')
 });
