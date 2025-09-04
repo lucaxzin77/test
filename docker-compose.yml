@@ -12,6 +12,7 @@ services:
       MYSQL_PASSWORD: system_pass
     volumes:
       - db_data:/var/lib/mysql
+      - ./init-db:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
 

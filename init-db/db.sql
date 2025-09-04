@@ -1,7 +1,7 @@
-    CREATE DATABASE cinco_irmoes;
+    CREATE DATABASE IF NOT EXISTS cinco_irmoes;
     USE cinco_irmoes;
 
-    CREATE TABLE cliente(
+    CREATE TABLE IF NOT EXISTS cliente(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         nome VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
@@ -9,7 +9,7 @@
         data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE TABLE funcionario(
+    CREATE TABLE IF NOT EXISTS funcionario(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         nome VARCHAR(100) NOT NULL,
         email VARCHAR(100) NOT NULL UNIQUE,
@@ -24,7 +24,7 @@
         data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE TABLE veiculo(
+    CREATE TABLE IF NOT EXISTS veiculo(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         marca VARCHAR(100) NOT NULL,
         tipo ENUM('carro', 'moto', 'camionete') NOT NULL,
@@ -40,7 +40,7 @@
         data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE TABLE locacao(
+    CREATE TABLE IF NOT EXISTS locacao(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         id_cliente INT UNSIGNED NOT NULL,
         id_funcionario INT UNSIGNED NOT NULL,
@@ -53,7 +53,7 @@
         FOREIGN KEY (id_veiculo) REFERENCES veiculo(id)
     );
 
-    CREATE TABLE venda(
+    CREATE TABLE IF NOT EXISTS venda(
         id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
         id_cliente INT UNSIGNED NOT NULL,
         id_funcionario INT UNSIGNED NOT NULL,
@@ -67,5 +67,3 @@
 
     INSERT INTO veiculo(marca, tipo, modelo, cor, ano, n_portas, combustivel, cambio, km, preco, status)
     VALUES("Chevrolet", "carro" ,"Chevette", "Prata", 1978, 2, "Gasolina", "Manual", 100, 75000, "disponivel");
-
-    SELECT * FROM veiculo;
